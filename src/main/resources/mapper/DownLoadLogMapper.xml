@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antennababy.download.DownLoadLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.antennababy.download.DownLoadLog">
+            <id property="id" column="ID" jdbcType="BIGINT"/>
+            <result property="fileName" column="FILE_NAME" jdbcType="VARCHAR"/>
+            <result property="orginUrl" column="ORGIN_URL" jdbcType="VARCHAR"/>
+            <result property="localUrl" column="LOCAL_URL" jdbcType="VARCHAR"/>
+            <result property="status" column="STATUS" jdbcType="VARCHAR"/>
+            <result property="submitDate" column="SUBMIT_DATE" jdbcType="TIMESTAMP"/>
+            <result property="completeDate" column="COMPLETE_DATE" jdbcType="TIMESTAMP"/>
+            <result property="userIp" column="USER_IP" jdbcType="VARCHAR"/>
+            <result property="userAgent" column="USER_AGENT" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,FILE_NAME,ORGIN_URL,
+        LOCAL_URL,STATUS,SUBMIT_DATE,
+        COMPLETE_DATE,USER_IP,USER_AGENT
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from DOWN_LOAD_LOG
+        where  ID = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from DOWN_LOAD_LOG
+        where  ID = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.antennababy.download.DownLoadLog" useGeneratedKeys="true">
+        insert into DOWN_LOAD_LOG
+        ( ID,FILE_NAME,ORGIN_URL
+        ,LOCAL_URL,STATUS,SUBMIT_DATE
+        ,COMPLETE_DATE,USER_IP,USER_AGENT
+        )
+        values (#{id,jdbcType=BIGINT},#{fileName,jdbcType=VARCHAR},#{orginUrl,jdbcType=VARCHAR}
+        ,#{localUrl,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{submitDate,jdbcType=TIMESTAMP}
+        ,#{completeDate,jdbcType=TIMESTAMP},#{userIp,jdbcType=VARCHAR},#{userAgent,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.antennababy.download.DownLoadLog" useGeneratedKeys="true">
+        insert into DOWN_LOAD_LOG
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">ID,</if>
+                <if test="fileName != null">FILE_NAME,</if>
+                <if test="orginUrl != null">ORGIN_URL,</if>
+                <if test="localUrl != null">LOCAL_URL,</if>
+                <if test="status != null">STATUS,</if>
+                <if test="submitDate != null">SUBMIT_DATE,</if>
+                <if test="completeDate != null">COMPLETE_DATE,</if>
+                <if test="userIp != null">USER_IP,</if>
+                <if test="userAgent != null">USER_AGENT,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=BIGINT},</if>
+                <if test="fileName != null">#{fileName,jdbcType=VARCHAR},</if>
+                <if test="orginUrl != null">#{orginUrl,jdbcType=VARCHAR},</if>
+                <if test="localUrl != null">#{localUrl,jdbcType=VARCHAR},</if>
+                <if test="status != null">#{status,jdbcType=VARCHAR},</if>
+                <if test="submitDate != null">#{submitDate,jdbcType=TIMESTAMP},</if>
+                <if test="completeDate != null">#{completeDate,jdbcType=TIMESTAMP},</if>
+                <if test="userIp != null">#{userIp,jdbcType=VARCHAR},</if>
+                <if test="userAgent != null">#{userAgent,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.antennababy.download.DownLoadLog">
+        update DOWN_LOAD_LOG
+        <set>
+                <if test="fileName != null">
+                    FILE_NAME = #{fileName,jdbcType=VARCHAR},
+                </if>
+                <if test="orginUrl != null">
+                    ORGIN_URL = #{orginUrl,jdbcType=VARCHAR},
+                </if>
+                <if test="localUrl != null">
+                    LOCAL_URL = #{localUrl,jdbcType=VARCHAR},
+                </if>
+                <if test="status != null">
+                    STATUS = #{status,jdbcType=VARCHAR},
+                </if>
+                <if test="submitDate != null">
+                    SUBMIT_DATE = #{submitDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="completeDate != null">
+                    COMPLETE_DATE = #{completeDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="userIp != null">
+                    USER_IP = #{userIp,jdbcType=VARCHAR},
+                </if>
+                <if test="userAgent != null">
+                    USER_AGENT = #{userAgent,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   ID = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.antennababy.download.DownLoadLog">
+        update DOWN_LOAD_LOG
+        set 
+            FILE_NAME =  #{fileName,jdbcType=VARCHAR},
+            ORGIN_URL =  #{orginUrl,jdbcType=VARCHAR},
+            LOCAL_URL =  #{localUrl,jdbcType=VARCHAR},
+            STATUS =  #{status,jdbcType=VARCHAR},
+            SUBMIT_DATE =  #{submitDate,jdbcType=TIMESTAMP},
+            COMPLETE_DATE =  #{completeDate,jdbcType=TIMESTAMP},
+            USER_IP =  #{userIp,jdbcType=VARCHAR},
+            USER_AGENT =  #{userAgent,jdbcType=VARCHAR}
+        where   ID = #{id,jdbcType=BIGINT} 
+    </update>
+</mapper>

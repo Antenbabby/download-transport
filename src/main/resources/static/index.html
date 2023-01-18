@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!-- saved from url=(0021)https://d.serctl.com/ -->
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="下载">
+    <meta name="author" content="">
+
+    <title>下载</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./index_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--
+        <link href="./ie10-viewport-bug-workaround.css" rel="stylesheet">
+    -->
+    <link href="./index_files/dashboard.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!--
+        <link href="./dashboard.css" rel="stylesheet">
+    -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" async="" src="./index_files/analytics.js.下载"></script>
+    <script src="./index_files/jquery.min.js.下载"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="./index_files/js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-34884373-3');
+    </script>
+    <style>
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/index.html">首页</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/index.html">开始下载</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div id="info" style="display:none" class="alert" role="alert"></div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">开始下载</div>
+                <div class="panel-body">
+                    <p>完成后请尽快下载，文件不定期删除。不需要购买! 如果文件名识别失败则会返回一个日期_随机值的文件名,请下载后自行调整文件后缀.</p>
+
+                </div>
+                <div class="panel-body">
+                    <form>
+
+                        <input type="hidden" name="uuid">
+
+                        <div style="display: block;margin-top: 0em;" class="form-inline">
+                            <label for="" class="col-sm-1 ">下载地址:</label>
+                            <div class="col-sm-5" style="padding-left: 0px;">
+                                <input type="hidden" value="zh-cn" name="hl">
+                                <input class="form-control" id="download_url" name="download_url" style="width: 100%;">
+                            </div>
+                            <a id="dl_start" class="btn btn-default">提交</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="panel-heading">下载历史</div>
+                <div class="container-fluid">
+                    <div class="container-fluid">
+                        <div class="row"
+                             style="middle; padding: 5px; border-top: 1px solid #ddd; line-height: 1.42857143; vertical-align: top;">
+
+                            <div style="display: block;margin-top: 0em;" class="form-inline">
+
+                                <div class="col-sm-5" style="padding-left: 0px; padding-right: 5px;">
+                                    <input type="hidden" value="zh-cn" name="hl">
+                                    <input class="form-control" value="" id="key2" name="q" style="width: 100%;">
+                                    <input hidden id="pageIndex" value='0'>
+                                </div>
+                                <a type="submit" id="search" class="btn btn-default">搜索</a>
+                            </div>
+                            <script>
+                                $(document).keyup(function (event) {
+                                    if (event.keyCode == 13) {
+                                        $("#search").trigger("click");
+                                        document.getElementById("search").click();
+                                    }
+                                });
+
+                                $("#search").click(function () {
+                                    $("#rowDiv").html('');
+                                    list();
+                                });
+
+                            </script>
+
+                        </div>
+                    </div>
+                    <div class="row"
+                         style="padding: 15px; border-top: 1px solid #ddd; line-height: 1.42857143; vertical-align: top;">
+                        <div class="col-xs-6 col-sm-4">文件名</div>
+                        <div class="clearfix visible-xs-block"></div>
+                        <div class="col-xs-6 col-sm-2">下载地址</div>
+                        <div class="col-xs-6 col-sm-2">下载时间</div>
+                        <div class="col-xs-6 col-sm-2">状态</div>
+                    </div>
+                    <div id="rowDiv">
+                    </div>
+                    <div id="moreDiv">
+                        <div class="row"
+                             style="middle; padding: 5px; border-top: 1px solid #ddd; line-height: 1.42857143; vertical-align: top;">
+                            <div class="col-xs-6 col-sm-4 text-overflow"><a id="moreBtn" class="btn btn-success">加载更多 </a>
+                            </div>
+                            <div class="clearfix visible-xs-block"></div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table">
+
+                </table>
+            </div>
+            <script>
+                $("#dl_start").click(function () {
+                    var uuid = $("input[name=uuid]").val();
+                    var url = $('form').attr("action");
+                    var download_url = $("#download_url").val();
+                    $("#info").removeClass("alert").addClass("alert alert-success");
+                    $("#info").html("正在下载，请稍等...");
+                    $("#info").show();
+                    $("#dl_start").hide();
+                    $("#download_url").val('');
+                    $.post("/api/submit", {url: download_url}, function (data) {
+                        if (data['code'] == '0') {
+                            $("#info").text(data['msg']);
+                            $("#info").show();
+                        } else {
+                            $("#info").removeClass("alert").addClass("alert alert-danger");
+                            $("#info").text(data['msg']);
+                            $("#info").show();
+                        }
+                        $("#dl_start").show();
+                    })
+                });
+                $("#moreBtn").click(()=>{
+                    $('#pageIndex').val(Number($('#pageIndex').val())+1);
+                    list();
+                });
+            </script>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        list();
+        function show() {
+            if ($("#show_info").is('.has-error')) {
+                $("#show_info").removeClass("has-error");
+            } else {
+                $("#show_info").addClass('has-error');
+            }
+        }
+    });
+
+    function list() {
+        var key2 = $('#key2').val();
+        var pageIndex = $('#pageIndex').val();
+        $.post("/api/list", {keyWords: key2,pageIndex:pageIndex}, function (data) {
+            if (data['code'] == '0') {
+                if(data.data!=null&&data.data.length>0){
+                    $.each(data.data,(index,item)=>{
+                        let str0="/detail?id="+item.id;
+                        let str1=   item.fileName;
+                        let str2=   item.status=='1'?'':'none';
+                        let str3=   '/'+item.localUrl;
+                        let str4=   item.submitDate;
+                        let str5=   item.status=='1'?'<a class="btn btn-success" target="_blank">已完成</a>':item.status=='0'?'<a class="btn btn-warning" target="_blank">下载中</a>':'<a class="btn btn-danger" target="_blank">失败</a>';
+                        let lineTemp='                <div class="row"\n' +
+                            '                             style="middle; padding: 5px; border-top: 1px solid #ddd; line-height: 1.42857143; vertical-align: top;">\n' +
+                            '                            <div class="col-xs-6 col-sm-4 text-overflow"><a class="text-muted" target="_blank"\n' +
+                            '                                                                            href="'+str0+'">'+str1+' </a>\n' +
+                            '                            </div>\n' +
+                            '                            <div class="clearfix visible-xs-block"></div>\n' +
+                            '                            <div class="col-xs-6 col-sm-2"><a target="_blank"\n' +
+                            '                                                    style="display: '+str2+'"          href="'+str3+'"\n' +
+                            '                                                              class="btn btn-success">下载</a>\n' +
+                            '                            </div>\n' +
+                            '                            <div class="col-xs-6 col-sm-2">'+str4+'</div>\n' +
+                            '                            <div class="col-xs-6 col-sm-2">'+str5+'\n' +
+                            '                            </div>\n' +
+                            '                        </div>';
+                        $("#rowDiv").append(lineTemp);
+                    });
+                    $("#moreBtn").show();
+                }else {
+                    $("#moreBtn").hide();
+                }
+            } else {
+                $("#info").removeClass("alert").addClass("alert alert-danger");
+                $("#info").text(data['msg']);
+                $("#info").show();
+            }
+        })
+    }
+
+
+
+</script>
+<script src="./index_files/bootstrap.min.js.下载"></script>
+
+
+</body>
+</html>
