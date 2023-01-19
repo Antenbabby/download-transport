@@ -8,7 +8,7 @@ git源码地址:https://gitee.com/antennababby/download-transport.git
 dockerHub:antennababy/download_transport:latest
 
 #### 软件架构
-springboot+h2+html+jquery
+springboot+h2+html+jquery+aria2
 
 
 #### 安装教程
