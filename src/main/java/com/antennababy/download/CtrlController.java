@@ -49,7 +49,7 @@ public class CtrlController {
         }
     }
     @RequestMapping("get")
-    public Res list(Long id){
+    public Res getById(Long id){
         try {
             Assert.notNull(id);
             DownLoadLog ret = ctrlService.getById(id);

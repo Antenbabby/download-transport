@@ -41,7 +41,7 @@ public class CtrlService  extends ServiceImpl<DownLoadLogMapper, DownLoadLog> {
 
 
     //状态 0下载中,1 完成,2 出错
-    public  String  submitTask(HttpServletRequest httpServletRequest,String url){
+    public  String  submitTask(HttpServletRequest request,String url){
         //查询30天内同地址的下载
         DownLoadLog downLoadLog = downLoadLogMapper.selectOne(Wrappers.<DownLoadLog>lambdaQuery().eq(DownLoadLog::getOrginUrl, url).orderByDesc(DownLoadLog::getSubmitDate).last(" limit 1 "));
         if(taskSize.get()>=maxTaskSize){
@@ -50,7 +50,7 @@ public class CtrlService  extends ServiceImpl<DownLoadLogMapper, DownLoadLog> {
             if(downLoadLog!=null){
                 if ("0".equals(downLoadLog.getStatus())) {
                     throw new RuntimeException("任务正在下载中!");
-                }else if(checkIsFirstDownLoad&&"1".equals(downLoadLog.getStatus())){
+                }else if(checkIsFirstDownLoad&&"1".equals(downLoadLog.getStatus())&&!"true".equalsIgnoreCase(request.getParameter("retry"))){
                     throw new RuntimeException("任务已存在!");
                 }
             }
@@ -63,19 +63,19 @@ public class CtrlService  extends ServiceImpl<DownLoadLogMapper, DownLoadLog> {
 
                     downLoadLog1.setStatus("0");
                     downLoadLog1.setOrginUrl(url);
-                    String localFileName = DateUtil.format(new Date(), DatePattern.PURE_DATETIME_FORMATTER) + "_" + RandomUtil.randomString(2);
+                    String localFileName = DateUtil.format(new Date(), DatePattern.PURE_DATETIME_FORMATTER) + RandomUtil.randomString(2);
                     if (validateFileName(fileName)) {
                         localFileName=localFileName+ "_" + fileName;
                     }else {
                         downLoadLog1.setFileName(localFileName);
                     }
                     downLoadLog1.setLocalUrl(localFileName);
-                    downLoadLog1.setUserAgent(httpServletRequest.getHeader(HttpHeaders.USER_AGENT));
-                    downLoadLog1.setUserIp(IPUtil.getIPAddress(httpServletRequest));
+                    downLoadLog1.setUserAgent(request.getHeader(HttpHeaders.USER_AGENT));
+                    downLoadLog1.setUserIp(IPUtil.getIPAddress(request));
                     downLoadLog1.setSubmitDate(new Date());
                     downLoadLogMapper.insert(downLoadLog1);
 
-                    String cmd = StrUtil.format("aria2c -d {} -o {} {}", DOWNLOAD_PATH, localFileName, url);
+                    String cmd = StrUtil.format("aria2c -s 5 -d {} -o {} {}", DOWNLOAD_PATH, localFileName, url);
                     log.info("CtrlUtil.submitTask cmd:{}", cmd);
                     Runtime rt = Runtime.getRuntime();
                     Process proc = rt.exec(cmd);

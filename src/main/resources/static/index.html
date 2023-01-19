@@ -169,6 +169,7 @@
                         if (data['code'] == '0') {
                             $("#info").text(data['msg']);
                             $("#info").show();
+                            window.setTimeout(()=>{window.location.href='/';},2000);
                         } else {
                             $("#info").removeClass("alert").addClass("alert alert-danger");
                             $("#info").text(data['msg']);
@@ -204,7 +205,7 @@
             if (data['code'] == '0') {
                 if(data.data!=null&&data.data.length>0){
                     $.each(data.data,(index,item)=>{
-                        let str0="/detail?id="+item.id;
+                        let str0="/detail.html?id="+item.id;
                         let str1=   item.fileName;
                         let str2=   item.status=='1'?'':'none';
                         let str3=   '/'+item.localUrl;

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://d.serctl.com/?uuid=b6e36e85-4d60-4be7-a548-1242338a9420 -->
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="2023-01-18-16-19-51-PowerToys-PowerToysSetup-0.66.0-x64.exe">
+    <meta name="author" content="2023-01-18-16-19-51-PowerToys-PowerToysSetup-0.66.0-x64.exe">
+
+    <title>2023-01-18-16-19-51-PowerToys-PowerToysSetup-0.66.0-x64.exe</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./detail_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--
+        <link href="./ie10-viewport-bug-workaround.css" rel="stylesheet">
+    -->
+    <link href="./detail_files/dashboard.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!--
+        <link href="./dashboard.css" rel="stylesheet">
+    -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" async="" src="./detail_files/analytics.js.下载"></script>
+    <script src="./detail_files/jquery.min.js.下载"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="./detail_files/js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-34884373-3');
+    </script>
+    <style>
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">首页</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid" id="content">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/">开始下载</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div id="info" style="display:none" class="alert" role="alert"></div>
+            <div class="panel panel-default">
+                <div class="panel-heading">文件详情</div>
+                <div class="panel-body">
+                    完成后请尽快下载，文件不定期删除。不需要购买!
+                </div>
+
+                <div class="container-fluid">
+
+                    <div class="row"
+                         style="padding: 15px; border-top: 1px solid #ddd; line-height: 1.42857143; vertical-align: top;">
+                        <div class="col-xs-6 col-sm-2">操作</div>
+                        <div class="col-xs-6 col-sm-4">文件名</div>
+                        <div class="clearfix visible-xs-block"></div>
+                        <div class="col-xs-6 col-sm-4">下载地址</div>
+                        <div class="col-xs-6 col-sm-2">下载时间</div>
+                    </div>
+
+                    <style>
+                        .tooltip-inner {
+                            background-color: #fff;
+                            padding: 0px;
+                            margin: 0px;
+                        }
+                    </style>
+
+
+                    <div class="row"
+                         style="middle; padding: 5px; border-top: 1px solid #ddd; line-height: 1.42857143; vertical-align: top;">
+                        <div class="col-xs-6 col-sm-2">${status}</div>
+                        <div class="col-xs-6 col-sm-4 text-overflow"><p id="fileName">${fileName}</p></div>
+                        <div class="clearfix visible-xs-block"></div>
+                        <div class="col-xs-6 col-sm-4"><a target="_blank" href="/${localUrl}" type="button"
+                                                          class="btn btn-success" data-html="true" title="">
+                            下载
+                        </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-2">${submitDate}</div>
+                    </div>
+                </div>
+                <table class="table">
+
+
+                </table>
+
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>文件名</dt>
+                        <dd>${fileName}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>下载地址</dt>
+                        <dd id="orginUrl">${orginUrl}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>提交时间</dt>
+                        <dd>${submitDate}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>完成时间</dt>
+                        <dd>${completeDate}</dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>提交用户IP</dt>
+                        <dd>${userIp}</dd>
+                        <!--
+                        <dd></dd>
+                        -->
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>用户代理</dt>
+                        <dd>${userAgent}</dd>
+                    </dl>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="./detail_files/bootstrap.min.js.下载"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+<script>
+    $('#myTabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+</script>
+<script>
+
+    $("#del_").click(function () {
+        var uuid = $("input[name=uuid]").val();
+        var url = $('form').attr("action");
+        $.post(url, {uuid: uuid}, function (data) {
+            data = JSON.parse(data);
+            if (data['messages'] == 'success') {
+                //console.log(data);
+                location.reload();
+            } else if (data['messages'] == 'danger') {
+                //console.log(data);
+                location.reload();
+            } else {
+                //console.log(data);
+                location.reload();
+            }
+        })
+    });
+
+</script>
+<script>
+    $(function () {
+        initData();
+    });
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+    var initData = () => {
+        $.post("/api/get", {id: GetQueryString("id")}, function (data) {
+            if (data['code'] == '0') {
+                let htmlstr = $("#content").html();
+                let ret=data.data;
+                let retry='<a onclick="retryClick()">重新下载</a>';
+                ret.status= ret.status=='1'?('<a class="btn btn-success" target="_blank">已完成</a>'+retry):ret.status=='0'?'<a class="btn btn-warning" target="_blank">下载中</a>':('<a class="btn btn-danger" target="_blank">失败</a>'+retry);
+
+                $.each(ret, (k, v) => {
+                    htmlstr = htmlstr.replaceAll("${" + k + "}", v==null?'':v);
+                });
+                $("#content").html(htmlstr);
+            } else {
+                $("#info").removeClass("alert").addClass("alert alert-danger");
+                $("#info").text(data['msg']);
+                $("#info").show();
+            }
+            $("#dl_start").show();
+        })
+    };
+
+    function retryClick(){
+        $.post("/api/submit", {url: $("#orginUrl").text().trim(),retry:'true'}, function (data) {
+            if (data['code'] == '0') {
+                $("#info").text(data['msg']);
+                $("#info").show();
+                window.setTimeout(()=>{window.location.href='/';},2000);
+            } else {
+                $("#info").removeClass("alert").addClass("alert alert-danger");
+                $("#info").text(data['msg']);
+                $("#info").show();
+            }
+            $("#dl_start").show();
+        })
+    }
+
+</script>
+<script src="./detail_files/bootstrap.min.js.下载"></script>
+
+
+</body>
+</html>
