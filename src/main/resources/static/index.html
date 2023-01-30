@@ -32,10 +32,10 @@
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script type="text/javascript" async="" src="./index_files/analytics.js.下载"></script>
+<!--    <script type="text/javascript" async="" src="./index_files/analytics.js.下载"></script>-->
     <script src="./index_files/jquery.min.js.下载"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async="" src="./index_files/js"></script>
+<!--    <script async="" src="./index_files/js"></script>-->
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -208,7 +208,8 @@
                         let str0="/detail.html?id="+item.id;
                         let str1=   item.fileName;
                         let str2=   item.status=='1'?'':'none';
-                        let str3=   '/'+item.localUrl;
+                        let str3=  '/'+item.localUrl;
+                        // let str3=   '/api/fetch/'+item.localUrl;
                         let str4=   item.submitDate;
                         let str5=   item.status=='1'?'<a class="btn btn-success" target="_blank">已完成</a>':item.status=='0'?'<a class="btn btn-warning" target="_blank">下载中</a>':'<a class="btn btn-danger" target="_blank">失败</a>';
                         let lineTemp='                <div class="row"\n' +
