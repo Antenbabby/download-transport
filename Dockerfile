@@ -6,4 +6,5 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 RUN  apk update \
     &&  apk add aria2
 COPY target/*.jar app.jar
+VOLUME /downloadTransport
 ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar /app.jar
