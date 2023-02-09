@@ -1,4 +1,4 @@
-package com.antennababy.download;
+package com.antennababy.download.app;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

@@ -1,4 +1,4 @@
-package com.antennababy.download;
+package com.antennababy.download.app;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

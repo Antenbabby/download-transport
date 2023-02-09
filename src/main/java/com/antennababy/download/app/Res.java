@@ -1,4 +1,4 @@
-package com.antennababy.download;
+package com.antennababy.download.app;
 
 import lombok.Data;
 

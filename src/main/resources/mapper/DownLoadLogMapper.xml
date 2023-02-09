@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antennababy.download.DownLoadLogMapper">
+<mapper namespace="com.antennababy.download.app.DownLoadLogMapper">
 
-    <resultMap id="BaseResultMap" type="com.antennababy.download.DownLoadLog">
+    <resultMap id="BaseResultMap" type="com.antennababy.download.app.DownLoadLog">
             <id property="id" column="ID" jdbcType="BIGINT"/>
             <result property="fileName" column="FILE_NAME" jdbcType="VARCHAR"/>
             <result property="orginUrl" column="ORGIN_URL" jdbcType="VARCHAR"/>
@@ -33,7 +33,7 @@
         delete from DOWN_LOAD_LOG
         where  ID = #{id,jdbcType=BIGINT} 
     </delete>
-    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.antennababy.download.DownLoadLog" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.antennababy.download.app.DownLoadLog" useGeneratedKeys="true">
         insert into DOWN_LOAD_LOG
         ( ID,FILE_NAME,ORGIN_URL
         ,LOCAL_URL,STATUS,SUBMIT_DATE
@@ -44,7 +44,7 @@
         ,#{completeDate,jdbcType=TIMESTAMP},#{userIp,jdbcType=VARCHAR},#{userAgent,jdbcType=VARCHAR}
         )
     </insert>
-    <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.antennababy.download.DownLoadLog" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.antennababy.download.app.DownLoadLog" useGeneratedKeys="true">
         insert into DOWN_LOAD_LOG
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">ID,</if>
@@ -69,7 +69,7 @@
                 <if test="userAgent != null">#{userAgent,jdbcType=VARCHAR},</if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.antennababy.download.DownLoadLog">
+    <update id="updateByPrimaryKeySelective" parameterType="com.antennababy.download.app.DownLoadLog">
         update DOWN_LOAD_LOG
         <set>
                 <if test="fileName != null">
@@ -99,7 +99,7 @@
         </set>
         where   ID = #{id,jdbcType=BIGINT} 
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.antennababy.download.DownLoadLog">
+    <update id="updateByPrimaryKey" parameterType="com.antennababy.download.app.DownLoadLog">
         update DOWN_LOAD_LOG
         set 
             FILE_NAME =  #{fileName,jdbcType=VARCHAR},
