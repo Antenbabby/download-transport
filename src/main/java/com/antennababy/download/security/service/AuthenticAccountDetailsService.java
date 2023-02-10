@@ -18,13 +18,19 @@
 
 package com.antennababy.download.security.service;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.lang.Assert;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Arrays;
 
 /**
  * 认证用户信息查询服务
@@ -34,7 +40,10 @@ import javax.inject.Named;
 @Named
 public class AuthenticAccountDetailsService implements UserDetailsService {
 
-
+    @Value("${file.config.login.password:123456}")
+    private String PASSWORD;
+    @Inject
+    private PasswordEncoder passwordEncoder;
 
     /**
      * 根据用户名查询用户角色、权限等信息
@@ -42,7 +51,9 @@ public class AuthenticAccountDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new User("admin","admin",null);
+        Assert.isTrue("admin".equals(username),"用户名/密码错误");
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("admin");
+        return new User(username,passwordEncoder.encode(PASSWORD), Arrays.asList(simpleGrantedAuthority));
     }
 
 }

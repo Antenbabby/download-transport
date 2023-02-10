@@ -19,6 +19,8 @@
 package com.antennababy.download.security.provider;
 
 import com.antennababy.download.security.service.AuthenticAccountDetailsService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,7 +28,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -44,9 +49,10 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
 
     @Inject
     private AuthenticAccountDetailsService authenticAccountDetailsService;
-
     @Inject
     private PasswordEncoder passwordEncoder;
+
+
 
     /**
      * 认证处理
@@ -62,10 +68,15 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
         // AuthenticationException的子类定义了多种认证失败的类型，这里仅处“理用户不存在”、“密码不正确”两种
         // 用户不存在的话会直接由loadUserByUsername()抛出异常
         UserDetails user = authenticAccountDetailsService.loadUserByUsername(username);
-        if (!passwordEncoder.matches(password, user.getPassword())) throw new BadCredentialsException("密码不正确");
+        if (!passwordEncoder.matches(password,user.getPassword())) throw new BadCredentialsException("密码不正确");
         // 认证通过，返回令牌
         return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
 
+    }
+
+    @ExceptionHandler(OAuth2Exception.class)
+    public ResponseEntity<OAuth2Exception> handleException(OAuth2Exception e) throws Exception {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**

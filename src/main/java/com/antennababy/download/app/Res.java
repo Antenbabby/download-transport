@@ -41,4 +41,7 @@ public class Res implements Serializable {
         res.setCode(code);
         return res;
     }
+    public static Res fail(Object code,String msg){
+        return Res.fail(code.toString(),msg);
+    }
 }

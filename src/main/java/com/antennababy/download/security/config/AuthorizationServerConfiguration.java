@@ -18,6 +18,7 @@
 
 package com.antennababy.download.security.config;
 
+import com.antennababy.download.security.exception.WebResponseExceptionTranslator;
 import com.antennababy.download.security.service.AuthenticAccountDetailsService;
 import com.antennababy.download.security.service.JWTAccessTokenService;
 import com.antennababy.download.security.service.OAuthClientDetailsService;
@@ -30,6 +31,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 /**
  * Spring Security OAuth2 授权服务器配置
@@ -43,7 +46,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
-
     /**
      * 令牌服务
      */
@@ -72,6 +74,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private AuthenticAccountDetailsService accountService;
 
 
+    @Autowired
+    WebResponseExceptionTranslator webResponseExceptionTranslator;
     /**
      * 配置客户端详情服务
      */
@@ -96,7 +100,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(AuthorizationServerEndpointsConfigurer endpoint) {
         endpoint.authenticationManager(authenticationManager)
                 .userDetailsService(accountService)
-                .tokenServices(tokenService)
+                .tokenServices(tokenService).exceptionTranslator(webResponseExceptionTranslator)
                 //控制TokenEndpoint端点请求访问的类型，默认HttpMethod.POST
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
     }

@@ -47,12 +47,12 @@ public class OAuthClientDetailsService implements ClientDetailsService {
      * 客户端ID
      * 这里的客户端就是指本项目的前端代码
      */
-    private static final String CLIENT_ID = "bookstore_frontend";
+    private static final String CLIENT_ID = "download_client";
     /**
      * 客户端密钥
      * 在OAuth2协议中，ID是可以公开的，密钥应当保密，密钥用以证明当前申请授权的客户端是未被冒充的
      */
-    private static final String CLIENT_SECRET = "bookstore_secret";
+    private static final String CLIENT_SECRET = "download_secret";
 
     @Inject
     private PasswordEncoder passwordEncoder;

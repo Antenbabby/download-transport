@@ -26,12 +26,7 @@
         <link href="./dashboard.css" rel="stylesheet">
     -->
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <script src="./common/common.js"></script>
 <!--    <script type="text/javascript" async="" src="./detail_files/analytics.js.下载"></script>-->
     <script src="./detail_files/jquery.min.js.下载"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -179,7 +174,7 @@
     $("#del_").click(function () {
         var uuid = $("input[name=uuid]").val();
         var url = $('form').attr("action");
-        $.post(url, {uuid: uuid}, function (data) {
+        post(url, {uuid: uuid}, function (data) {
             data = JSON.parse(data);
             if (data['messages'] == 'success') {
                 //console.log(data);
@@ -208,7 +203,7 @@
     }
 
     var initData = () => {
-        $.post("/api/get", {id: GetQueryString("id")}, function (data) {
+        post("/api/get", {id: GetQueryString("id")}, function (data) {
             if (data['code'] == '0') {
                 let htmlstr = $("#content").html();
                 let ret=data.data;
@@ -229,7 +224,7 @@
     };
 
     function retryClick(){
-        $.post("/api/submit", {url: $("#orginUrl").text().trim(),retry:'true'}, function (data) {
+        post("/api/submit", {url: $("#orginUrl").text().trim(),retry:'true'}, function (data) {
             if (data['code'] == '0') {
                 $("#info").text(data['msg']);
                 $("#info").show();

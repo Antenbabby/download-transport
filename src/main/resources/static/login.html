@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://127.0.0.1:9090/#/login -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>登陆</title>
+    <link rel="shortcut icon" href="http://127.0.0.1:9090/favicon.ico">
+    <link href="./login_files/app.13440f960e43a3574b009b7352447f18.css" rel="stylesheet">
+    <script src="./index_files/jquery.min.js.下载"></script>
+
+</head>
+<body>
+<div id="app"><!---->
+    <div data-v-350afc81="" class="bg">
+        <div data-v-350afc81="" class="dialog dialog-shadow">
+            <div data-v-73f7116f="" data-v-350afc81=""><img data-v-73f7116f=""
+                                                            src="./login_files/logo-color.5500ec5.png" class="logo">
+                <!--                <span data-v-73f7116f="" class="title">登陆</span>-->
+                <form data-v-73f7116f="" class="el-form login-form" id="loginForm">
+                    <div data-v-73f7116f="" class="el-form-item is-success is-required"><!---->
+                        <div class="el-form-item__content">
+                            <div data-v-73f7116f="" class="el-input el-input-group el-input-group--prepend">
+                                <!--                                <div class="el-input-group__prepend"><i data-v-73f7116f="" class="el-icon-user"></i>-->
+                                <!--                                </div>-->
+                                <input name="username" type="text" autocomplete="off" placeholder="请输入用户" class="el-input__inner" value="admin">
+                                <!----><!----><!----><!----></div><!----></div>
+                    </div>
+                    <div data-v-73f7116f="" class="el-form-item is-success is-required"><!---->
+                        <div class="el-form-item__content">
+                            <div data-v-73f7116f=""
+                                 class="el-input el-input-group el-input-group--prepend el-input--suffix">
+                                <!--                                <div class="el-input-group__prepend"><i data-v-73f7116f="" class="el-icon-unlock"></i>-->
+                                <!--                                </div>-->
+                                <input  name="password" type="password" autocomplete="off" placeholder="请输入密码" class="el-input__inner">
+                                <!----><span class="el-input__suffix"><span class="el-input__suffix-inner"><!---->
+                                <!----><i class="el-input__icon el-icon-view el-input__clear"></i><!----></span><i
+                                    class="el-input__icon el-input__validateIcon el-icon-circle-check"></i></span>
+                                <!----><!----></div><!----></div>
+                        <input hidden name="grant_type" value="password">
+                        <input hidden name="client_id" value="download_client">
+                        <input hidden name="client_secret" value="download_secret">
+                    </div>
+                    <div data-v-73f7116f="" class="actions">
+                        <button data-v-73f7116f="" type="button" class="el-button el-button--primary" onclick="login()"
+                                style="width: 100%; display: block; margin: 50px 0px 0px;"><!----><!----><span>登录</span>
+                        </button>
+                    </div>
+                </form>
+            </div> <!----></div>
+    </div>
+</div>
+</body>
+<script>
+    function login(){
+        $.post("/oauth/token", $("#loginForm").serialize(), function (data) {
+            console.log(data);
+            if(data.code== 400){
+                alert(data.msg);
+            }else {
+                localStorage.setItem("token", data.access_token);
+                window.location.href = "/static/index.html";
+            }
+        });
+    }
+</script>
+</html>
