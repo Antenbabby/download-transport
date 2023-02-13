@@ -23,7 +23,7 @@ public class WebResponseExceptionTranslator extends DefaultWebResponseExceptionT
         HttpHeaders headers = new HttpHeaders();
         headers.set("Cache-Control", "no-store");
         headers.set("Pragma", "no-cache");
-        log.info(JSONUtil.toJsonStr(e));
+        log.error("WebResponseExceptionTranslator.translate :",e);
         ResponseEntity<Object> response = new ResponseEntity<>(Res.fail(401,"认证失败."), headers,HttpStatus.valueOf(200));
 
         return response;
