@@ -55,11 +55,11 @@
     function login(){
         $.post("/oauth/token", $("#loginForm").serialize(), function (data) {
             console.log(data);
-            if(data.code== 400||!!!data.access_token){
-                alert(data.msg+data.error);
-            }else {
+            if(!!data.access_token){
                 localStorage.setItem("token", data.access_token);
                 window.location.href = "/static/index.html";
+            }else {
+                alert(!!data.msg?data.msg:data.error);
             }
         });
     }
