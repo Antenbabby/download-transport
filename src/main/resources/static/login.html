@@ -55,8 +55,8 @@
     function login(){
         $.post("/oauth/token", $("#loginForm").serialize(), function (data) {
             console.log(data);
-            if(data.code== 400){
-                alert(data.msg);
+            if(data.code== 400||!!!data.access_token){
+                alert(data.msg+data.error);
             }else {
                 localStorage.setItem("token", data.access_token);
                 window.location.href = "/static/index.html";

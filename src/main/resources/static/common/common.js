@@ -9,10 +9,16 @@ var post=function (url, params, callback) {
             request.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
         },
         success: function (data) {
-            callback(data);
+            if(data.code==0){
+                callback(data);
+            }else {
+                alert(data.msg);
+                window.location.href = "/static/login.html";
+            }
+
         },
         error: function (data) {
-
+            alert(data);
         }
     })
 }

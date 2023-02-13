@@ -16,16 +16,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
  * @date 2020/4/8 0:09
  **/
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private AuthenticationEntryPoint authenticationEntryPoint;
-
-    @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //配置异常处理器
-        http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).
-                accessDeniedHandler(accessDeniedHandler);
         http.headers().cacheControl().disable();
     }
 

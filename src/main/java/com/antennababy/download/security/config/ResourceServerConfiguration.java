@@ -18,6 +18,7 @@
 
 package com.antennababy.download.security.config;
 
+import com.antennababy.download.security.exception.AuthenticationEntryPointImpl;
 import com.antennababy.download.security.service.JWTAccessTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +31,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -52,6 +54,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Autowired
     private JWTAccessTokenService tokenService;
 
+    @Autowired
+    AuthenticationEntryPointImpl oauthEntryPoint;
+
     /**
      * 配置HTTP访问相关的安全选项
      */
@@ -69,6 +74,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
+        //异常处理
+        resources.authenticationEntryPoint(oauthEntryPoint);
         resources.tokenServices(tokenService);
     }
 }
